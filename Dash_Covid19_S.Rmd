@@ -11,8 +11,8 @@ output:
     #navbar:
     #  - {icon: "fa-archive", title: "Banco de Dados", href: "https://brasil.io/covid19/", align: right}
     navbar:
-      - {icon: "fas fa-user-edit", title: "Tiago Cruz", align: right}
-    source: embed
+      - {icon: "fa-linkedin", title: "Tiago Cruz", href: "https://www.linkedin.com/in/tiago-cruz-b65721284/", align: right}
+    source: "https://github.com/Tiago-HCruz/Covid-19_Brasil/blob/main/Dash_Covid19_S.Rmd"
 lang: pt-BR
 ---
 
@@ -578,7 +578,7 @@ dbGetQuery(db, paste("SELECT",
                    ~Latitude,
                    color=~pal(`Casos Confirmados por 100 mil Hab`),
                    stroke = FALSE, 
-                   fillOpacity = 0.75,
+                   fillOpacity = 0.35,
                    radius =~sqrt(`Casos Confirmados por 100 mil Hab`/20),
                    group = "Casos") %>%
   addLegend("bottomright",
@@ -842,39 +842,6 @@ dbGetQuery(db, paste("SELECT fonte AS Fontes,
 Ocorrência no País {data-icon="fa-globe-americas"} 
 ===
 
-Column {data-width=300} 
----
-
-### confirmed {.value-box}
-```{r}
-flexdashboard::valueBox(dbGetQuery(db, 
-                                   paste("SELECT SUM(`Novos Casos`) FROM",
-                                   "(SELECT MAX(Data), UF,
-                                   `Novos Casos` FROM
-                                   Caso_Novos_Estados",
-                                   "WHERE is_last==1",
-                                   "GROUP BY UF)"))[[1]] %>%
-                          number(big.mark = ".", decimal.mark = ","),
-                        icon = "fas fa-user-md",
-                        caption = "Novos Casos",
-color = "#F08080")
-```
-
-### Mortes {.value-box}
-```{r}
-flexdashboard::valueBox(dbGetQuery(db, 
-                                   paste("SELECT SUM(`Novos Óbitos`) FROM",
-                                   "(SELECT MAX(Data), UF,
-                                   `Novos Óbitos` FROM
-                                   Caso_Novos_Estados",
-                                   "WHERE is_last==1",
-                                   "GROUP BY UF)"))[[1]]  %>%
-                          number(big.mark = ".", decimal.mark = ","),
-                        icon = "fas fa-ribbon",
-                        caption = "Novas Mortes",
-                        color = "#A9A9A9")
-```
-
 Column {.tabset .tabset-fade}
 ---
 
@@ -964,9 +931,15 @@ Novos_Calend <- function(ocorrencia, ano){
                                       decimal.mark = ","),
                        name = "Pessoas")
  
+ #library("highcharter")
+ 
  ggcal(df$Data, df[[2]])+
   Cor+
-  ggtitle(paste("Novos", ocorrencia, "em",  ano, "por dia"))
+  ggtitle(paste("Novos", ocorrencia, "em",  ano, "por dia")) 
+   
+
+ 
+ 
 }
 
 ```
@@ -1180,6 +1153,7 @@ Referências {data-icon="fa-clipboard"}
 # comparação com as demais mortes
 ## Grafico de linha 
 ## waffle (acada 100 mortes n são se covid) https://github.com/hrbrmstr/waffle
+## https://jkunst.com/highcharter/
 ```
     
     
