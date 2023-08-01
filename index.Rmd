@@ -12,7 +12,7 @@ output:
     #  - {icon: "fa-archive", title: "Banco de Dados", href: "https://brasil.io/covid19/", align: right}
     navbar:
       - {icon: "fa-linkedin", title: "Tiago Cruz", href: "https://www.linkedin.com/in/tiago-cruz-b65721284/", align: right}
-    source: "https://github.com/Tiago-HCruz/Covid-19_Brasil/blob/main/Dash_Covid19_S.Rmd"
+    source: "https://github.com/Tiago-HCruz/Covid-19_Brasil/blob/main/index.Rmd"
 lang: pt-BR
 ---
 
